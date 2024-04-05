@@ -1,0 +1,74 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://hrh7luenxm4q"]
+
+[ext_resource type="FontFile" uid="uid://dnryf1ihahifu" path="res://ui/ARIALBD.TTF" id="1_wc3x1"]
+[ext_resource type="Texture2D" uid="uid://bg81typ3j0vi3" path="res://ui/slider_grabber.png" id="1_xmaos"]
+[ext_resource type="FontFile" uid="uid://cbo5x2q8crrnk" path="res://ui/ARIAL.TTF" id="2_5iprw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ac0a"]
+bg_color = Color(0.458824, 0.458824, 0.458824, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onccv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ihuv"]
+bg_color = Color(0.866667, 0.866667, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.635294, 0.635294, 0.635294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smg0s"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dnrq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82rfe"]
+bg_color = Color(0.623529, 0.623529, 0.623529, 1)
+skew = Vector2(0.2, 0)
+border_width_left = 16
+border_width_right = 8
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lsu8"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.2, 0)
+border_width_left = 16
+border_width_right = 8
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[resource]
+HSlider/icons/grabber = ExtResource("1_xmaos")
+HSlider/icons/grabber_highlight = ExtResource("1_xmaos")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_7ac0a")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_onccv")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_wc3x1")
+LineEdit/colors/caret_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_selected_color = Color(0, 0, 0, 1)
+LineEdit/fonts/font = ExtResource("2_5iprw")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_6ihuv")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_6ihuv")
+MarginContainer/constants/margin_bottom = 8
+MarginContainer/constants/margin_left = 8
+MarginContainer/constants/margin_right = 8
+MarginContainer/constants/margin_top = 0
+TabContainer/colors/font_hovered_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_unselected_color = Color(0, 0, 0, 1)
+TabContainer/font_sizes/font_size = 16
+TabContainer/fonts/font = ExtResource("2_5iprw")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_smg0s")
+TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_3dnrq")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_82rfe")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_4lsu8")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_82rfe")
