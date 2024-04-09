@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=5 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
+[ext_resource type="PackedScene" uid="uid://dq0tyxm2mjm2c" path="res://ui/dropdown.tscn" id="3_5q1b1"]
+[ext_resource type="PackedScene" uid="uid://b3s3b4oc57130" path="res://ui/masslabel.tscn" id="4_6ndst"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -71,9 +73,53 @@ text = "Height (m)"
 layout_mode = 2
 text = "Diameter (m)"
 
+[node name="DropDownMaterial" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Material"
+items_comma_separated = "Aluminum"
+
+[node name="DropDownNoseShape" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Nose shape"
+items_comma_separated = "Pointed, Rounded, Flat"
+
+[node name="MassLabel" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("4_6ndst")]
+layout_mode = 2
+
 [node name="LAUNCH" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SliderFuelAmount" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("1_ephah")]
+layout_mode = 2
+text = "Fuel Amount (t)"
+
+[node name="DropDownFuelType" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Fuel Type"
+items_comma_separated = "Liquid Hydrogen"
+
+[node name="DropDownLaunch" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Launch Location"
+items_comma_separated = "Earth, Int. Space Station, Moon, Mars"
+
+[node name="DropDownGoal" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Goal Destination"
+items_comma_separated = "Earth, Int. Space Station, Moon, Mars"
+
+[node name="MassLabel" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("4_6ndst")]
+layout_mode = 2
+with_fuel = true
 
 [node name="RESULTS" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
 visible = false

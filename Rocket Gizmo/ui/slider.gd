@@ -1,4 +1,3 @@
-class_name GizmoSlider
 extends MarginContainer
 
 # Instance variables for slider
