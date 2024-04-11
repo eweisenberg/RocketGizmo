@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=10 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://launch_tab_controller.gd" id="5_ql1eb"]
 [ext_resource type="Texture2D" uid="uid://b8iisjcs8qgr2" path="res://ui/pause_icon.png" id="6_174ps"]
 [ext_resource type="Texture2D" uid="uid://iaejspnjfgv7" path="res://ui/restart_icon.png" id="7_atm3o"]
+[ext_resource type="Texture2D" uid="uid://ctomfdg0n1nkt" path="res://ui/axes.png" id="9_ivmuq"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -49,11 +50,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 2
-current_tab = 1
 clip_tabs = false
 
 [node name="DESIGN" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN"]
@@ -67,32 +66,42 @@ grow_vertical = 2
 [node name="SliderEngines" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
 text = "Number of engines"
-max_value = 100
+min_value = 1
+max_value = 9
 step = 1
-default_value = 50
+default_value = 1
 
 [node name="SliderHeight" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
 text = "Height (m)"
+min_value = 50
+max_value = 120
+step = 1
+default_value = 80
 
 [node name="SliderDiameter" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
 text = "Diameter (m)"
+min_value = 8
+max_value = 15
+step = 1
+default_value = 10
 
 [node name="DropDownMaterial" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Material"
-items_comma_separated = "Aluminum"
+items_comma_separated = "Aluminum, Titanium, Carbon composite"
 
 [node name="DropDownNoseShape" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Nose shape"
-items_comma_separated = "Pointed, Rounded, Flat"
+items_comma_separated = "Parabolic, Ogive, Cone, Blunt"
 
 [node name="MassLabel" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("4_6ndst")]
 layout_mode = 2
 
 [node name="LAUNCH" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH"]
@@ -107,16 +116,20 @@ script = ExtResource("5_ql1eb")
 [node name="SliderFuelAmount" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
 text = "Fuel Amount (t)"
+min_value = 100
+max_value = 500
+step = 10
+default_value = 300
 
 [node name="DropDownFuelType" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Fuel Type"
-items_comma_separated = "Liquid Hydrogen"
+items_comma_separated = "Liquid Fuel, Solid Fuel"
 
 [node name="DropDownLaunch" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Launch Location"
-items_comma_separated = "Earth, Int. Space Station, Moon, Mars"
+items_comma_separated = "Earth, Moon, Mars"
 
 [node name="LabelGravity" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer"]
 layout_mode = 2
@@ -126,30 +139,30 @@ horizontal_alignment = 2
 [node name="DropDownGoal" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Goal Destination"
-items_comma_separated = "Earth, Int. Space Station, Moon, Mars"
+items_comma_separated = "Earth, Moon, Mars"
 
 [node name="LabelDistance" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer"]
 layout_mode = 2
 text = "Distance:"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer"]
+[node name="TimeControlsContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="ButtonPlay" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/HBoxContainer"]
+[node name="ButtonPlay" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 icon = ExtResource("5_j0s33")
 icon_alignment = 1
 
-[node name="ButtonPause" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/HBoxContainer"]
+[node name="ButtonPause" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 icon = ExtResource("6_174ps")
 icon_alignment = 1
 
-[node name="ButtonRestart" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/HBoxContainer"]
+[node name="ButtonRestart" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 icon = ExtResource("7_atm3o")
@@ -162,3 +175,29 @@ with_fuel = true
 [node name="RESULTS" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "Summary will display after rocket is launched."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("9_ivmuq")
+
+[node name="DropDown" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer" instance=ExtResource("3_5q1b1")]
+layout_mode = 2
+text = "Graph:"
+items_comma_separated = "y vs t, v vs t, a vs t, KE vs t, U vs t, Thrust vs t"
