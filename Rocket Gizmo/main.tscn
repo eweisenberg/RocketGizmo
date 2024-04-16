@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=13 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
+[ext_resource type="Script" path="res://design_tab_container.gd" id="2_5a6ub"]
+[ext_resource type="Script" path="res://global.gd" id="2_a1nil"]
 [ext_resource type="PackedScene" uid="uid://dq0tyxm2mjm2c" path="res://ui/dropdown.tscn" id="3_5q1b1"]
 [ext_resource type="PackedScene" uid="uid://b3s3b4oc57130" path="res://ui/masslabel.tscn" id="4_6ndst"]
 [ext_resource type="Texture2D" uid="uid://r7i6g6kp47jf" path="res://ui/play_icon.png" id="5_j0s33"]
@@ -9,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b8iisjcs8qgr2" path="res://ui/pause_icon.png" id="6_174ps"]
 [ext_resource type="Texture2D" uid="uid://iaejspnjfgv7" path="res://ui/restart_icon.png" id="7_atm3o"]
 [ext_resource type="Texture2D" uid="uid://ctomfdg0n1nkt" path="res://ui/axes.png" id="9_ivmuq"]
+[ext_resource type="Script" path="res://results_tab_container.gd" id="11_yddqe"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -18,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tphsw")
+script = ExtResource("2_a1nil")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -62,6 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_5a6ub")
 
 [node name="SliderEngines" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
@@ -115,7 +120,7 @@ script = ExtResource("5_ql1eb")
 
 [node name="SliderFuelAmount" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("1_ephah")]
 layout_mode = 2
-text = "Fuel Amount (t)"
+text = "Fuel Amount (liquid tons)"
 min_value = 100
 max_value = 500
 step = 10
@@ -124,7 +129,7 @@ default_value = 300
 [node name="DropDownFuelType" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
 text = "Fuel Type"
-items_comma_separated = "Liquid Fuel, Solid Fuel"
+items_comma_separated = "Liquid Oxygen, Liquid Hydrogen, Solid Fuel"
 
 [node name="DropDownLaunch" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer" instance=ExtResource("3_5q1b1")]
 layout_mode = 2
@@ -183,13 +188,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("11_yddqe")
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 text = "Summary will display after rocket is launched."
-horizontal_alignment = 1
-vertical_alignment = 1
+scroll_active = false
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/TabContainer/RESULTS/VBoxContainer"]
 layout_mode = 2

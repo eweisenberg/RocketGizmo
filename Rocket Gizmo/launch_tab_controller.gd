@@ -4,11 +4,31 @@ extends VBoxContainer
 @onready var distance_label: Label = $LabelDistance
 @onready var launch_dropdown: OptionButton = $DropDownLaunch/OptionButton
 @onready var goal_dropdown: OptionButton = $DropDownGoal/OptionButton
+@onready var mass_label: MarginContainer = $MassLabel
+@onready var fuel_amount: HSlider = $SliderFuelAmount/HBoxContainer/HSlider
+@onready var fuel_type: OptionButton = $DropDownFuelType/OptionButton
 
 func _ready() -> void:
 	launch_dropdown.item_selected.connect(change_gravity_label)
 	goal_dropdown.item_selected.connect(change_distance_label)
 	change_gravity_label(0)
+
+func _process(delta: float) -> void:
+	var mass: int = get_tree().root.get_child(0).global_mass
+	var density: int #kg/ton
+	# Liquid Oxygen, Liquid Hydrogen, Solid Fuel
+	if fuel_type.selected == 0:
+		density = 1141
+	elif fuel_type.selected == 1:
+		density = 70
+	else:
+		density = 1800
+	
+	mass += fuel_amount.value * density
+	
+	get_tree().root.get_child(0).global_fuel_mass = mass
+	
+	mass_label.update_label(mass / 907)
 
 func change_gravity_label(_index: int) -> void:
 	var text: String = "Gravity: "
