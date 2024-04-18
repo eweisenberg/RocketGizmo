@@ -5,6 +5,7 @@ extends VBoxContainer
 @onready var height: HSlider = $SliderHeight/HBoxContainer/HSlider
 @onready var diameter: HSlider = $SliderDiameter/HBoxContainer/HSlider
 @onready var mat: OptionButton = $DropDownMaterial/OptionButton
+@onready var nose: OptionButton = $DropDownNoseShape/OptionButton
 
 var mass: int
 
@@ -26,3 +27,8 @@ func _process(delta: float) -> void:
 	get_tree().root.get_child(0).global_engines = engines.value
 	
 	mass_label.update_label(mass / 907)
+	
+	get_tree().root.get_child(0).global_height = height.value
+	get_tree().root.get_child(0).global_diameter = diameter.value
+	get_tree().root.get_child(0).global_nose = nose.selected
+	get_tree().root.get_child(0).global_material = mat.selected

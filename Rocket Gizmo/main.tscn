@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=15 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
 [ext_resource type="Script" path="res://design_tab_container.gd" id="2_5a6ub"]
 [ext_resource type="Script" path="res://global.gd" id="2_a1nil"]
 [ext_resource type="PackedScene" uid="uid://dq0tyxm2mjm2c" path="res://ui/dropdown.tscn" id="3_5q1b1"]
+[ext_resource type="Script" path="res://visuals.gd" id="3_x7fjc"]
 [ext_resource type="PackedScene" uid="uid://b3s3b4oc57130" path="res://ui/masslabel.tscn" id="4_6ndst"]
+[ext_resource type="Texture2D" uid="uid://dwkeyywgsl4ts" path="res://sprites/cone_sprite.tres" id="4_8e4hq"]
 [ext_resource type="Texture2D" uid="uid://r7i6g6kp47jf" path="res://ui/play_icon.png" id="5_j0s33"]
 [ext_resource type="Script" path="res://launch_tab_controller.gd" id="5_ql1eb"]
 [ext_resource type="Texture2D" uid="uid://b8iisjcs8qgr2" path="res://ui/pause_icon.png" id="6_174ps"]
@@ -44,11 +46,38 @@ grow_vertical = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="VisualContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Add visuals here"
-horizontal_alignment = 1
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 27
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("3_x7fjc")
+
+[node name="Design" type="Node" parent="MarginContainer/HBoxContainer/VisualContainer"]
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+offset_left = 8.0
+offset_top = 27.0
+offset_right = 574.0
+offset_bottom = 640.0
+size_flags_horizontal = 3
+color = Color(0.592157, 0.835294, 0.972549, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+position = Vector2(295, 560)
+rotation = -3.14159
+color = Color(0.588235, 0.588235, 0.588235, 1)
+offset = Vector2(-20, 0)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 300, 0, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+modulate = Color(0.501961, 0.8, 0.756863, 1)
+position = Vector2(295, 260)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_8e4hq")
+offset = Vector2(0, -400)
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
