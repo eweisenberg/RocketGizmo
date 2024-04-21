@@ -2,6 +2,8 @@ extends MarginContainer
 
 @onready var rocket_rect: Polygon2D = $Design/Polygon2D
 @onready var nose_sprite: Sprite2D = $Design/Sprite2D
+@onready var bg_color: ColorRect = $Design/BackgroundColor
+@onready var bg_image: TextureRect = $Design/TextureRect
 
 func _process(delta: float) -> void:
 	var height: int = get_tree().root.get_child(0).global_height
@@ -29,3 +31,12 @@ func _process(delta: float) -> void:
 		rocket_rect.color = Color.WEB_GRAY
 	else: # carbon composite
 		rocket_rect.color = Color.BLACK
+	
+	var planet: String = get_tree().root.get_child(0).global_planet
+	if planet == "Mars":
+		bg_image.texture = load("res://ui/mars_background.jpg")
+	elif planet == "Moon":
+		bg_image.texture = load("res://ui/moon_background.jpg")
+	else:
+		bg_image.texture = load("res://ui/earth_background.png")
+

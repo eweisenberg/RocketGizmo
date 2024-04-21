@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+
 @onready var gravity_label: Label = $LabelGravity
 @onready var distance_label: Label = $LabelDistance
 @onready var launch_dropdown: OptionButton = $DropDownLaunch/OptionButton
@@ -33,10 +34,13 @@ func _process(delta: float) -> void:
 func change_gravity_label(_index: int) -> void:
 	var text: String = "Gravity: "
 	if launch_dropdown.selected == 0:
+		get_tree().root.get_child(0).global_planet = "Earth"
 		text += "9.8"
 	elif launch_dropdown.selected == 1:
+		get_tree().root.get_child(0).global_planet = "Moon"
 		text += "1.62"
 	else:
+		get_tree().root.get_child(0).global_planet = "Mars"
 		text += "3.71"
 	text += " m/s²  "
 	gravity_label.text = text

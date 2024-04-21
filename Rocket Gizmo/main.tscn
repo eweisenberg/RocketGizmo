@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=16 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://visuals.gd" id="3_x7fjc"]
 [ext_resource type="PackedScene" uid="uid://b3s3b4oc57130" path="res://ui/masslabel.tscn" id="4_6ndst"]
 [ext_resource type="Texture2D" uid="uid://dwkeyywgsl4ts" path="res://sprites/cone_sprite.tres" id="4_8e4hq"]
+[ext_resource type="Texture2D" uid="uid://bw8oeie5odq1j" path="res://ui/moon_background.jpg" id="4_utcar"]
 [ext_resource type="Texture2D" uid="uid://r7i6g6kp47jf" path="res://ui/play_icon.png" id="5_j0s33"]
 [ext_resource type="Script" path="res://launch_tab_controller.gd" id="5_ql1eb"]
 [ext_resource type="Texture2D" uid="uid://b8iisjcs8qgr2" path="res://ui/pause_icon.png" id="6_174ps"]
@@ -57,13 +58,21 @@ script = ExtResource("3_x7fjc")
 
 [node name="Design" type="Node" parent="MarginContainer/HBoxContainer/VisualContainer"]
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+[node name="BackgroundColor" type="ColorRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+visible = false
 offset_left = 8.0
 offset_top = 27.0
 offset_right = 574.0
 offset_bottom = 640.0
 size_flags_horizontal = 3
 color = Color(0.592157, 0.835294, 0.972549, 1)
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+offset_left = 8.0
+offset_top = 27.0
+offset_right = 574.0
+offset_bottom = 640.0
+texture = ExtResource("4_utcar")
 
 [node name="Polygon2D" type="Polygon2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
 position = Vector2(295, 560)

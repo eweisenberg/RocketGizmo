@@ -7,3 +7,4 @@ var global_height: int
 var global_diameter: int
 var global_nose: int
 var global_material: int
+var global_planet: String
