@@ -1,6 +1,5 @@
 extends VBoxContainer
 
-
 @onready var gravity_label: Label = $LabelGravity
 @onready var distance_label: Label = $LabelDistance
 @onready var launch_dropdown: OptionButton = $DropDownLaunch/OptionButton
@@ -8,6 +7,9 @@ extends VBoxContainer
 @onready var mass_label: MarginContainer = $MassLabel
 @onready var fuel_amount: HSlider = $SliderFuelAmount/HBoxContainer/HSlider
 @onready var fuel_type: OptionButton = $DropDownFuelType/OptionButton
+@onready var play_button: Button = $TimeControlsContainer/ButtonPlay
+@onready var pause_button: Button = $TimeControlsContainer/ButtonPause
+@onready var restart_button: Button = $TimeControlsContainer/ButtonRestart
 
 func _ready() -> void:
 	launch_dropdown.item_selected.connect(change_gravity_label)
@@ -66,5 +68,17 @@ func change_distance_label(_index: int) -> void:
 	var distance: int = abs(final_position - initial_position)
 	if distance == 0:
 		distance_label.text = "Select different launch and goal locations.  "
+		disable_buttons()
 	else:
 		distance_label.text = str(distance) + " km away  "
+		enable_buttons()
+
+func disable_buttons() -> void:
+	play_button.disabled = true
+	pause_button.disabled = true
+	restart_button.disabled = true
+
+func enable_buttons() -> void:
+	play_button.disabled = false
+	pause_button.disabled = false
+	restart_button.disabled = false

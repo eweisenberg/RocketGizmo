@@ -35,6 +35,12 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.458824, 0.458824, 0.458824, 1)
 
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 47.0
+offset_bottom = 28.0
+text = " Time playing:"
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -92,9 +98,11 @@ offset = Vector2(0, -400)
 layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 2
+current_tab = 1
 clip_tabs = false
 
 [node name="DESIGN" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/DESIGN"]
@@ -144,7 +152,6 @@ items_comma_separated = "Parabolic, Ogive, Cone, Blunt"
 layout_mode = 2
 
 [node name="LAUNCH" type="TabBar" parent="MarginContainer/HBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH"]
