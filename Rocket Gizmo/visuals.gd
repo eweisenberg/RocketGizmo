@@ -1,8 +1,7 @@
 extends MarginContainer
 
-@onready var rocket_rect: Polygon2D = $Design/Polygon2D
-@onready var nose_sprite: Sprite2D = $Design/Sprite2D
-@onready var bg_color: ColorRect = $Design/BackgroundColor
+@onready var rocket_rect: Polygon2D = $Design/Rocket/Polygon2D
+@onready var nose_sprite: Sprite2D = $Design/Rocket/Sprite2D
 @onready var bg_image: TextureRect = $Design/TextureRect
 
 func _process(delta: float) -> void:

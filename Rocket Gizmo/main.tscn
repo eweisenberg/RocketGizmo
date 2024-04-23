@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7mu7ptklptdy"]
+[gd_scene load_steps=21 format=3 uid="uid://c7mu7ptklptdy"]
 
 [ext_resource type="PackedScene" uid="uid://dd5u4u5skqu14" path="res://ui/slider.tscn" id="1_ephah"]
 [ext_resource type="Theme" uid="uid://hrh7luenxm4q" path="res://ui/ui_theme.tres" id="1_tphsw"]
@@ -7,14 +7,77 @@
 [ext_resource type="PackedScene" uid="uid://dq0tyxm2mjm2c" path="res://ui/dropdown.tscn" id="3_5q1b1"]
 [ext_resource type="Script" path="res://visuals.gd" id="3_x7fjc"]
 [ext_resource type="PackedScene" uid="uid://b3s3b4oc57130" path="res://ui/masslabel.tscn" id="4_6ndst"]
-[ext_resource type="Texture2D" uid="uid://dwkeyywgsl4ts" path="res://sprites/cone_sprite.tres" id="4_8e4hq"]
-[ext_resource type="Texture2D" uid="uid://bw8oeie5odq1j" path="res://ui/moon_background.jpg" id="4_utcar"]
+[ext_resource type="Texture2D" uid="uid://b4r6kqnr630ej" path="res://sprites/parabola_sprite.tres" id="4_luq0d"]
 [ext_resource type="Texture2D" uid="uid://r7i6g6kp47jf" path="res://ui/play_icon.png" id="5_j0s33"]
+[ext_resource type="Texture2D" uid="uid://cu6op324jaqdu" path="res://ui/earth_background.png" id="5_jfiya"]
 [ext_resource type="Script" path="res://launch_tab_controller.gd" id="5_ql1eb"]
 [ext_resource type="Texture2D" uid="uid://b8iisjcs8qgr2" path="res://ui/pause_icon.png" id="6_174ps"]
+[ext_resource type="Texture2D" uid="uid://bdjgrgvt4bsr7" path="res://ui/black_background.png" id="6_ni3dh"]
+[ext_resource type="Texture2D" uid="uid://bad6t8h8owq65" path="res://ui/earth.png" id="7_0e4at"]
 [ext_resource type="Texture2D" uid="uid://iaejspnjfgv7" path="res://ui/restart_icon.png" id="7_atm3o"]
 [ext_resource type="Texture2D" uid="uid://ctomfdg0n1nkt" path="res://ui/axes.png" id="9_ivmuq"]
 [ext_resource type="Script" path="res://results_tab_container.gd" id="11_yddqe"]
+
+[sub_resource type="Animation" id="Animation_u6nme"]
+resource_name = "rocket_launch"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/VisualContainer/Design/Rocket:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VisualContainer/Design/Rocket:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(288, 540), Vector2(288, 150)]
+}
+
+[sub_resource type="Animation" id="Animation_kwxew"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBoxContainer/VisualContainer/Design/Rocket:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/HBoxContainer/VisualContainer/Design/Rocket:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(288, 540)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p732s"]
+_data = {
+"RESET": SubResource("Animation_kwxew"),
+"rocket_launch": SubResource("Animation_u6nme")
+}
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -26,6 +89,11 @@ grow_vertical = 2
 theme = ExtResource("1_tphsw")
 script = ExtResource("2_a1nil")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p732s")
+}
+
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -35,11 +103,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.458824, 0.458824, 0.458824, 1)
 
+[node name="FormButton" type="Button" parent="."]
+top_level = true
+layout_mode = 0
+offset_left = 8.0
+offset_right = 137.0
+offset_bottom = 27.0
+text = "Click here for feedback form"
+
 [node name="TimeLabel" type="Label" parent="."]
 layout_mode = 0
-offset_right = 47.0
+offset_left = 234.0
+offset_right = 391.0
 offset_bottom = 28.0
-text = " Time playing:"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Time played: "
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -64,35 +142,70 @@ script = ExtResource("3_x7fjc")
 
 [node name="Design" type="Node" parent="MarginContainer/HBoxContainer/VisualContainer"]
 
-[node name="BackgroundColor" type="ColorRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
-visible = false
-offset_left = 8.0
-offset_top = 27.0
-offset_right = 574.0
-offset_bottom = 640.0
-size_flags_horizontal = 3
-color = Color(0.592157, 0.835294, 0.972549, 1)
+[node name="Rocket" type="Node2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+z_index = 2
+position = Vector2(288, 540)
+scale = Vector2(0.1, 0.1)
+metadata/_edit_group_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design/Rocket"]
+rotation = -3.14159
+color = Color(0.588235, 0.588235, 0.588235, 1)
+offset = Vector2(-20, 0)
+polygon = PackedVector2Array(0, 0, 40, 0, 40, 300, 0, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design/Rocket"]
+modulate = Color(0.501961, 0.8, 0.756863, 1)
+position = Vector2(0, -300)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_luq0d")
+offset = Vector2(0, -400)
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
 offset_left = 8.0
 offset_top = 27.0
 offset_right = 574.0
 offset_bottom = 640.0
-texture = ExtResource("4_utcar")
+texture = ExtResource("5_jfiya")
 
-[node name="Polygon2D" type="Polygon2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
-position = Vector2(295, 560)
-rotation = -3.14159
-color = Color(0.588235, 0.588235, 0.588235, 1)
-offset = Vector2(-20, 0)
-polygon = PackedVector2Array(0, 0, 40, 0, 40, 300, 0, 300)
+[node name="BlackTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
+offset_left = 8.0
+offset_top = 27.0
+offset_right = 574.0
+offset_bottom = 640.0
+texture = ExtResource("6_ni3dh")
 
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer/VisualContainer/Design"]
-modulate = Color(0.501961, 0.8, 0.756863, 1)
-position = Vector2(295, 260)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_8e4hq")
-offset = Vector2(0, -400)
+[node name="LaunchPlanet" type="TextureRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design/BlackTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = 201.5
+offset_right = 981.0
+offset_bottom = 1225.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("7_0e4at")
+
+[node name="GoalPlanet" type="TextureRect" parent="MarginContainer/HBoxContainer/VisualContainer/Design/BlackTexture"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -296.5
+offset_right = 981.0
+offset_bottom = 727.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("7_0e4at")
 
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -207,6 +320,7 @@ icon = ExtResource("5_j0s33")
 icon_alignment = 1
 
 [node name="ButtonPause" type="Button" parent="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 icon = ExtResource("6_174ps")
@@ -251,3 +365,7 @@ texture = ExtResource("9_ivmuq")
 layout_mode = 2
 text = "Graph:"
 items_comma_separated = "y vs t, v vs t, a vs t, KE vs t, U vs t, Thrust vs t"
+
+[connection signal="pressed" from="FormButton" to="." method="_on_form_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer/ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TabContainer/LAUNCH/VBoxContainer/TimeControlsContainer/ButtonRestart" to="." method="_on_button_restart_pressed"]

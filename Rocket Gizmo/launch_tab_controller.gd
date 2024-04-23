@@ -60,10 +60,13 @@ func change_distance_label(_index: int) -> void:
 	var final_position: int
 	if goal_dropdown.selected == 0:
 		final_position = 0
+		get_tree().root.get_child(0).global_goal = "Earth"
 	elif goal_dropdown.selected == 1:
 		final_position = 384400
+		get_tree().root.get_child(0).global_goal = "Moon"
 	else:
 		final_position = 225000000
+		get_tree().root.get_child(0).global_goal = "Mars"
 	
 	var distance: int = abs(final_position - initial_position)
 	if distance == 0:

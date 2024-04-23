@@ -71,25 +71,24 @@ border_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_smg0s"]
 bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dnrq"]
+border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82rfe"]
 bg_color = Color(0.623529, 0.623529, 0.623529, 1)
 skew = Vector2(0.2, 0)
 border_width_left = 16
 border_width_right = 8
-border_width_bottom = 4
 border_color = Color(1, 1, 1, 0)
 expand_margin_left = 8.0
 expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dnrq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lsu8"]
 bg_color = Color(1, 1, 1, 1)
 skew = Vector2(0.2, 0)
 border_width_left = 16
 border_width_right = 8
-border_width_bottom = 4
 border_color = Color(1, 1, 1, 0)
 expand_margin_left = 8.0
 expand_margin_right = 8.0
@@ -152,6 +151,7 @@ RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
 RichTextLabel/font_sizes/normal_font_size = 24
 RichTextLabel/fonts/normal_font = ExtResource("1_wc3x1")
 RichTextLabel/styles/normal = SubResource("StyleBoxFlat_mmxq1")
+TabContainer/colors/font_disabled_color = Color(0, 0, 0, 1)
 TabContainer/colors/font_hovered_color = Color(0, 0, 0, 1)
 TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
 TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
@@ -159,6 +159,7 @@ TabContainer/colors/font_unselected_color = Color(0, 0, 0, 1)
 TabContainer/font_sizes/font_size = 16
 TabContainer/fonts/font = ExtResource("2_5iprw")
 TabContainer/styles/panel = SubResource("StyleBoxFlat_smg0s")
+TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_82rfe")
 TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_3dnrq")
 TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_82rfe")
 TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_4lsu8")
