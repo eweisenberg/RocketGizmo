@@ -25,11 +25,11 @@ func _process(delta: float) -> void:
 	
 	var material: int = get_tree().root.get_child(0).global_material
 	if material == 0: # aluminum
-		rocket_rect.color = Color.GRAY
+		rocket_rect.texture = load("res://sprites/light_gray_gradient.tres")
 	elif material == 1: # titanium
-		rocket_rect.color = Color.WEB_GRAY
+		rocket_rect.texture = load("res://sprites/dark_gray_gradient.tres")
 	else: # carbon composite
-		rocket_rect.color = Color.BLACK
+		rocket_rect.texture = load("res://sprites/black_gradient.tres")
 	
 	var planet: String = get_tree().root.get_child(0).global_planet
 	if planet == "Mars":

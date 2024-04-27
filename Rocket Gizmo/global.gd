@@ -19,22 +19,21 @@ var sec_played: float = 0.0
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var launch_planet_texture: TextureRect = $MarginContainer/HBoxContainer/VisualContainer/Design/BlackTexture/LaunchPlanet
 @onready var goal_planet_texture: TextureRect = $MarginContainer/HBoxContainer/VisualContainer/Design/BlackTexture/GoalPlanet
+@onready var not_enough_thrust_label: Label = $MarginContainer/HBoxContainer/VisualContainer/Design/BlackTexture/Label
 
 func _ready() -> void:
 	_on_button_restart_pressed()
 
 func _process(delta: float) -> void:
 	sec_played += delta
-	if sec_played < 10:
+	if fmod(sec_played, 60.0) < 10:
 		time_label.text = "Time played: " + str(int(sec_played) / 60) + ":0" + str(int(sec_played) % 60)
 	else:
 		time_label.text = "Time played: " + str(int(sec_played) / 60) + ":" + str(int(sec_played) % 60)
 
 
 func _on_button_play_pressed() -> void:
-	set_tabs_disabled(true)
 	black_bg.visible = true
-	animation_player.play("rocket_launch")
 	
 	if global_planet == "Mars":
 		launch_planet_texture.texture = load("res://ui/mars.png")
@@ -49,19 +48,28 @@ func _on_button_play_pressed() -> void:
 		goal_planet_texture.texture = load("res://ui/moon.png")
 	else:
 		goal_planet_texture.texture = load("res://ui/earth.png")
+	
+	var thrust: float = (global_engines * 4000000) / (9.07 * global_fuel_mass / 907 * 9.81)
+	var animation_speed: float = 1.0
+	if thrust >= 5:
+		not_enough_thrust_label.hide()
+		animation_speed = 1.0 + (thrust - 5.0) * 0.1
+	else:
+		not_enough_thrust_label.show()
+		animation_speed = 0.0
+	animation_player.play("rocket_launch", -1, animation_speed)
 
 func _on_button_restart_pressed() -> void:
-	set_tabs_disabled(false)
 	black_bg.visible = false
 	animation_player.stop()
 	rocket.position = Vector2(288, 580)
 	rocket.scale = Vector2(1, 1)
 
-func set_tabs_disabled(disabled: bool) -> void:
-	tabs.set_tab_disabled(0, disabled)
-	tabs.set_tab_disabled(1, disabled)
-	tabs.set_tab_disabled(2, disabled)
-
 
 func _on_form_button_pressed() -> void:
 	OS.shell_open("https://forms.gle/1c113o8DWpJRwbFx9")
+
+
+func _on_tab_container_tab_changed(tab: int) -> void:
+	if is_node_ready():
+		_on_button_restart_pressed()

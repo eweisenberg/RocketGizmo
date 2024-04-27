@@ -15,6 +15,6 @@ func _process(delta: float) -> void:
 	var velocity: int = 8000
 	var ke: int = 0.5 * mass * velocity * velocity / 1000000000
 	text += " The maximum velocity of the rocket was " + str(velocity) + " m/s."
-	text += "The maximum kinetic energy of the rocket was " + str(ke) + "×10⁹ J."
+	text += " The maximum kinetic energy of the rocket was " + str(ke) + "×10⁹ J."
 	
 	summary.text = text
